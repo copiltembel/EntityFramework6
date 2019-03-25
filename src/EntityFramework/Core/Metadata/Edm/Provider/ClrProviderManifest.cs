@@ -145,6 +145,10 @@ namespace System.Data.Entity.Core.Metadata.Edm.Provider
                             {
                                 primitiveTypeKind = PrimitiveTypeKind.Time;
                             }
+                            else if (clrType.IsGenericType && clrType.GetGenericTypeDefinition() == typeof(DbId<>))
+                            {
+                                primitiveTypeKind = PrimitiveTypeKind.DbId;
+                            }
                             break;
                         }
                 }
@@ -219,6 +223,7 @@ namespace System.Data.Entity.Core.Metadata.Edm.Provider
             primitiveTypes[(int)PrimitiveTypeKind.SByte] = CreatePrimitiveType(typeof(SByte), PrimitiveTypeKind.SByte);
             primitiveTypes[(int)PrimitiveTypeKind.Single] = CreatePrimitiveType(typeof(Single), PrimitiveTypeKind.Single);
             primitiveTypes[(int)PrimitiveTypeKind.String] = CreatePrimitiveType(typeof(String), PrimitiveTypeKind.String);
+            primitiveTypes[(int)PrimitiveTypeKind.DbId] = CreatePrimitiveType(typeof(DbId<>), PrimitiveTypeKind.DbId);
 
             var readOnlyTypesArray = new ReadOnlyCollection<PrimitiveType>(primitiveTypes);
             var readOnlyTypes = new ReadOnlyCollection<PrimitiveType>(primitiveTypes.Where(t => t != null).ToList());

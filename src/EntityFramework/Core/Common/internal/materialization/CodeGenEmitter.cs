@@ -2,6 +2,7 @@
 
 namespace System.Data.Entity.Core.Common.Internal.Materialization
 {
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Data.Common;
     using System.Data.Entity.Core.Metadata.Edm;
@@ -399,6 +400,11 @@ namespace System.Data.Entity.Core.Common.Internal.Materialization
             {
                 try
                 {
+                    if (typeof(TTarget).IsGenericType() && typeof(TTarget).GetGenericTypeDefinition() == typeof(DbId<>))
+                    {
+                        var dbEntityType = typeof(TTarget).GenericTypeArguments[0];
+                        return (TTarget)CreateDbIdGenericInstance(dbEntityType, (int)(object)value);
+                    }
                     return (TTarget)(object)value;
                 }
                 catch (InvalidCastException)
@@ -685,6 +691,24 @@ namespace System.Data.Entity.Core.Common.Internal.Materialization
             Expression result = Expression.Call(
                 Shaper_Parameter, Shaper_SetStatePassthrough.MakeGenericMethod(value.Type), Expression.Constant(stateSlotNumber), value);
             return result;
+        }
+
+        static ConcurrentDictionary<Type, Func<int, object>> dbEntityCreatorCache = new ConcurrentDictionary<Type, Func<int, object>>();
+        static object CreateDbIdGenericInstance(Type dbEntityGenericParameterType, int parameter)
+        {
+            Func<int, object> instanceCreator = dbEntityCreatorCache.GetOrAdd(dbEntityGenericParameterType, (type) => { return GetInstanceCreator(type); });
+            return instanceCreator(parameter);
+        }
+
+        private static Func<int, object> GetInstanceCreator(Type dbEntityGenericParameterType)
+        {
+            var genericType = typeof(DbId<>).MakeGenericType(dbEntityGenericParameterType);
+            var constructorInfo = genericType.GetConstructors()[0];
+            var parameterExpression = Expression.Parameter(typeof(int));
+            var expression = Expression.New(constructorInfo, parameterExpression);
+            var conversion = Expression.Convert(expression, typeof(object));
+            var instanceCreator = Expression.Lambda<Func<int, object>>(conversion, parameterExpression).Compile();
+            return instanceCreator;
         }
 
         #endregion

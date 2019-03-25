@@ -549,7 +549,8 @@ namespace System.Data.Entity.Core.Mapping
 
                 // We expect the CLR prmitive type and their corresponding EDM primitive types to have the same primitive type kind (at least for now)
                 if (memberType.PrimitiveTypeKind
-                    != ((PrimitiveType)objectMember.TypeUsage.EdmType).PrimitiveTypeKind)
+                    != ((PrimitiveType)objectMember.TypeUsage.EdmType).PrimitiveTypeKind
+                    && !(((PrimitiveType)objectMember.TypeUsage.EdmType).PrimitiveTypeKind == PrimitiveTypeKind.DbId))
                 {
                     throw new MappingException(
                         Strings.Mapping_Default_OCMapping_Invalid_MemberType(

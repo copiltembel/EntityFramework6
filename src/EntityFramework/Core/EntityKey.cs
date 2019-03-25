@@ -1158,7 +1158,7 @@ namespace System.Data.Entity.Core
             if (Helper.IsPrimitiveType(keyMemberEdmType))
             {
                 var entitySetKeyType = ((PrimitiveType)keyMemberEdmType).ClrEquivalentType;
-                if (entitySetKeyType != keyValue.GetType())
+                if (entitySetKeyType != keyValue.GetType() && !(keyValue.GetType().IsGenericType && keyValue.GetType().GetGenericTypeDefinition() == typeof(DbId<>)))
                 {
                     if (isArgumentException)
                     {

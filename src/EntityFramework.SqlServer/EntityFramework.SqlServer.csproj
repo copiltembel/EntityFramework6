@@ -13,7 +13,7 @@
     <AssemblyName>EntityFramework.SqlServer</AssemblyName>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <FileAlignment>512</FileAlignment>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>..\EcmaPublicKey.snk</AssemblyOriginatorKeyFile>
     <DelaySign>true</DelaySign>
   </PropertyGroup>
@@ -170,9 +170,6 @@
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\EcmaPublicKey.snk">
-      <Link>Properties\EcmaPublicKey.snk</Link>
-    </None>
     <None Include="Properties\Resources.SqlServer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Resources.SqlServer.cs</LastGenOutput>

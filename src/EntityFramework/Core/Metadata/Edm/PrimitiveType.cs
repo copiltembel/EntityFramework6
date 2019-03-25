@@ -214,6 +214,8 @@ namespace System.Data.Entity.Core.Metadata.Edm
                         return typeof(long);
                     case PrimitiveTypeKind.String:
                         return typeof(string);
+                    case PrimitiveTypeKind.DbId:
+                        return typeof(DbId<>);
                 }
 
                 return null;

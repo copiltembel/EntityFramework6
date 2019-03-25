@@ -13,7 +13,7 @@
     <AssemblyName>EntityFramework</AssemblyName>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <FileAlignment>512</FileAlignment>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>..\EcmaPublicKey.snk</AssemblyOriginatorKeyFile>
     <DelaySign>true</DelaySign>
   </PropertyGroup>
@@ -244,6 +244,7 @@
     <Compile Include="Core\Metadata\Edm\DbModelExtensions.cs" />
     <Compile Include="Core\Metadata\Edm\IEdmModelAdapter.cs" />
     <Compile Include="Core\Metadata\Edm\RelationshipMultiplicityConverter.cs" />
+    <Compile Include="DbId.cs" />
     <Compile Include="Infrastructure\Annotations\AnnotationCodeGenerator.cs" />
     <Compile Include="Infrastructure\Annotations\AnnotationValues.cs" />
     <Compile Include="Infrastructure\Annotations\CompatibilityResult.cs" />
@@ -1853,9 +1854,6 @@
     <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\EcmaPublicKey.snk">
-      <Link>Properties\EcmaPublicKey.snk</Link>
-    </None>
     <None Include="Core\Common\EntitySql\CqlGrammar.y" />
     <None Include="Core\Common\EntitySql\CqlLexer.l" />
     <None Include="Core\Common\EntitySql\GenerateParser.cmd" />

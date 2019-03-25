@@ -11,7 +11,7 @@ namespace System.Data.Entity.Core.Metadata.Edm
         internal const string TransientNamespace = "Transient";
 
         // max number of primitive types
-        internal const int NumPrimitiveTypes = (int)Edm.PrimitiveTypeKind.HierarchyId + 1;
+        internal const int NumPrimitiveTypes = (int)Edm.PrimitiveTypeKind.DbId + 1;
 
         // max number of primitive types
         internal const int NumBuiltInTypes = (int)BuiltInTypeKind.TypeUsage + 1;
@@ -161,6 +161,7 @@ namespace System.Data.Entity.Core.Metadata.Edm
         internal const string UInt32 = "UInt32";
         internal const string UInt64 = "UInt64";
         internal const string Xml = "Xml";
+        internal const string DbId = "DbId";
 
         // Name of the system defined attributes on edm type
         internal const string Name = "Name";

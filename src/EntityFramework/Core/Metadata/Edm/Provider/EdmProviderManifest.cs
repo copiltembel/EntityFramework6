@@ -151,6 +151,7 @@ namespace System.Data.Entity.Core.Metadata.Edm.Provider
             primitiveTypes[(int)PrimitiveTypeKind.GeographyMultiLineString] = new PrimitiveType();
             primitiveTypes[(int)PrimitiveTypeKind.GeographyMultiPolygon] = new PrimitiveType();
             primitiveTypes[(int)PrimitiveTypeKind.GeographyCollection] = new PrimitiveType();
+            primitiveTypes[(int)PrimitiveTypeKind.DbId] = new PrimitiveType();
 
             InitializePrimitiveType(
                 primitiveTypes[(int)PrimitiveTypeKind.Binary], PrimitiveTypeKind.Binary, EdmConstants.Binary, typeof(Byte[]));
@@ -230,6 +231,10 @@ namespace System.Data.Entity.Core.Metadata.Edm.Provider
             InitializePrimitiveType(
                 primitiveTypes[(int)PrimitiveTypeKind.GeometryCollection], PrimitiveTypeKind.GeometryCollection,
                 EdmConstants.GeometryCollection, typeof(DbGeometry));
+
+            InitializePrimitiveType(
+                primitiveTypes[(int)PrimitiveTypeKind.DbId], PrimitiveTypeKind.DbId,
+                EdmConstants.DbId, typeof(DbId<>));
 
             // Set all primitive types to be readonly
             foreach (var primitiveType in primitiveTypes)
