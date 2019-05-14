@@ -245,6 +245,7 @@
     <Compile Include="Core\Metadata\Edm\IEdmModelAdapter.cs" />
     <Compile Include="Core\Metadata\Edm\RelationshipMultiplicityConverter.cs" />
     <Compile Include="DbId.cs" />
+    <Compile Include="DbIdUtils.cs" />
     <Compile Include="Infrastructure\Annotations\AnnotationCodeGenerator.cs" />
     <Compile Include="Infrastructure\Annotations\AnnotationValues.cs" />
     <Compile Include="Infrastructure\Annotations\CompatibilityResult.cs" />

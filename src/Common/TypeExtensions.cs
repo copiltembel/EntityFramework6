@@ -279,6 +279,11 @@ namespace System.Data.Entity.Utilities
         {
             DebugCheck.NotNull(type);
 
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(DbId<>))
+            {
+                return typeof(DbId<>).FullName;
+            }
+
             if (!type.IsNested)
             {
                 return type.FullName;
